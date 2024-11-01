@@ -1,0 +1,66 @@
+#+title: Gentoo Installation Note of Lenovo83AL ( XiaoXin Pro 14 IRH8 )
+#+startup: show2levels
+#+properties: header-args :mkdirp yes
+
+* install system
+** time, locale, passwd, user
+#+begin_src sh :shebang #!/usr/bin/env bash
+source /etc/profile
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+hwclock --systohc
+locale-gen
+useradd -g users -G wheel,portage -m wimi
+passwd
+passwd wimi
+exit
+#+end_src
+** sync main repo
+#+begin_src sh :shebang #!/usr/bin/env bash
+emerge-webrsync
+emerge --oneshot sys-apps/portage dev-vcs/git
+rm -rf /var/db/repos/gentoo
+mv /etc/portage/gentoo.repo /etc/portage/repos.conf/gentoo
+emaint sync
+exit
+#+end_src
+** install base system
+#+begin_src sh :shebang #!/usr/bin/env bash
+emerge -avuDN
+emerge --depclean
+exit
+#+end_src
+** install default package
+#+begin_src sh :shebang #!/usr/bin/env bash
+emerge iw iwd laptop-mod-tools bluez \
+    efibootmgr btrfs-progs exfatprogs \
+    intel-microcode sof-firmware linux-firmware gentoo-kernel \
+    doas keyd neofetch neovim emacs
+exit
+#+end_src
+** efi boot
+#+begin_src sh :shebang #!/usr/bin/env bash
+mkdir -p /boot/efi/f
+mv /boot/kernel* /boot/efi/f/*.efi
+mv /boot/init* /boot/efi/f/*.img
+mv /boot/intel* /boot/efi/f/
+efibootmgr -c -d /dev/nvme0n1p1 -p 1 -b 0001 -L "failsafe" -l "\f\f.efi" -u "initrd=\f\intel-uc.img initrd=\f\f.img root=LABEL=LXS rootfstype=btrfs rootflags=subvol=/@ rw quiet splash loglevel=3 nowatchdog vt.default_red=48,231,166,229,140,244,129,181,98,231,166,229,140,244,129,165 vt.default_grn=52,130,209,200,170,184,200,191,104,130,209,200,170,184,200,173 vt.default_blu=70,132,137,144,238,228,190,226,128,132,137,144,238,228,190,206"
+exit
+#+end_src
+** service
+#+begin_src sh :shebang #!/usr/bin/env bash
+gpasswd -a wimi audio,video,pipewire &&
+systemctl enable systemd-networkd systemd-resolved systemd-timesyncd iwd bluetooth doas keyd acpid
+exit
+#+end_src
+** btrfs
+AVOID SUBVOLUME TO BE CREATED BY SYSTEMD!!!
+#+begin_src sh :shebang #!/usr/bin/env bash
+rmdir /srv /var/lib/portables /var/lib/machines
+mkdir /srv /var/lib/portables /var/lib/machines
+exit
+#+end_src
+* finish line
+#+begin_src sh :shebang #!/usr/bin/env bash
+reboot
+exit
+#+end_src

@@ -1,0 +1,17 @@
+#+title: README
+
+** machine
+Lenovo83AL - XiaoXin Pro 14 IRH8
+
+** host system
+*** wsl - debian
+*** linux - debian
+
+** guest system
+*** gentoo
+
+** File list
+*** 001-wsl.org: wsl setup
+*** 011-host-wsl.org: wsl as host system
+*** 012-host-linux.org: debian as host system
+*** 021-chroot.org: installation process after arch-chroot
