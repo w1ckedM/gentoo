@@ -31,7 +31,7 @@ exit
 #+end_src
 ** install default package
 #+begin_src sh :shebang #!/usr/bin/env bash
-emerge iw iwd laptop-mod-tools bluez \
+emerge iw iwd laptop-mode-tools bluez \
     efibootmgr btrfs-progs exfatprogs \
     intel-microcode sof-firmware linux-firmware gentoo-kernel \
     doas keyd neofetch neovim emacs
