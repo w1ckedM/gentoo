@@ -25,7 +25,7 @@ exit
 #+end_src
 ** install base system
 #+begin_src sh :shebang #!/usr/bin/env bash
-emerge -avuDN
+emerge -avuDN @world
 emerge --depclean
 exit
 #+end_src
@@ -48,7 +48,7 @@ exit
 #+end_src
 ** service
 #+begin_src sh :shebang #!/usr/bin/env bash
-gpasswd -a wimi audio,video,pipewire &&
+gpasswd -a wimi audio,video,pipewire
 systemctl enable systemd-networkd systemd-resolved systemd-timesyncd iwd bluetooth doas keyd acpid
 exit
 #+end_src
