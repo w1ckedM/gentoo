@@ -54,7 +54,7 @@ exit
 ~/.config/emacs/bin/doom install
 exit
 #+end_src
-* system configuration
+* system config
 ** bashrc
 #+begin_src bash :tangle "/sudo::/root/.bashrc"
 if [[ $- != *i* ]]; then
