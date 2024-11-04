@@ -16,7 +16,7 @@ wsl -d Debian
 sudo apt-get install zoxide eza fzf  \
     emacs-pgtk fd-find ripgrep libvterm-bin fonts-lxgw-wenkai \
     build-essential arch-install-scripts \
-    libtool cmake git \
+    libtool-bin cmake git \
     dosfstools btrfs-progs \
     btop neofetch
 exit
