@@ -67,10 +67,18 @@ set -o noclobber
 export PATH=$PATH:/usr/local/bin:
 #+end_src
 ** systemd
-*** configuration
+*** config
 #+begin_src bash :tangle "/sudo::/etc/wsl.conf"
 [boot]
 systemd=true
+#+end_src
+** systemd
+*** config
+#+begin_src bash :tangle "/sudo::/etc/apt/sources.list"
+deb http://mirrors.ustc.edu.cn/debian testing main contrib
+deb http://mirrors.ustc.edu.cn/debian testing-updates main contrib
+deb http://security.debian.org/debian-security testing-security main contrib
+deb http://ftp.debian.org/debian bookworm-backports main
 #+end_src
 ** keyd
 *** install from source
