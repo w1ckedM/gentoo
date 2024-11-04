@@ -125,7 +125,7 @@ f+j = pagedown
 g+h = pageup
 
 #+end_src
-* user configuration
+* user config
 ** bashrc
  + modify accordingly - [[file:~/.bashrc][.bashrc]]
 #+begin_src bash
