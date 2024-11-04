@@ -14,7 +14,7 @@ wsl -d Debian
 ** install packages
 #+begin_src sh :shebang #!/usr/bin/env bash
 sudo apt-get install zoxide eza fzf  \
-    emacs-gptk fd-find ripgrep libvterm-bin fonts-lxgw-wenkai \
+    emacs-pgtk fd-find ripgrep libvterm-bin fonts-lxgw-wenkai \
     build-essential cmake git arch-install-scripts \
     dosfstools btrfs-progs \
     btop neofetch
