@@ -1,7 +1,7 @@
 #+title: wsl
 #+startup: show2levels
 
-* installation
+* install
 ** setup sudo for powershell
  - Settings > for Developers
 ** install wsl - debian
@@ -90,7 +90,7 @@ git clone https://github.com/rvaiya/keyd &&
     sudo systemctl enable --now keyd
 exit
 #+end_src
-*** configuration
+*** config
 #+begin_src conf :tangle "/sudo::/etc/keyd/default.conf"
 [ids]
 
