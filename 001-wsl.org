@@ -6,7 +6,6 @@
  - Settings > for Developers
 ** install wsl - debian
 #+begin_src powershell
-wsl --list --online
 wsl --install -d debian
 wsl --set-default Debian
 wsl -d Debian
