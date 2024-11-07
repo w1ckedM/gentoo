@@ -37,7 +37,7 @@ exit
 + [[https://mirrors.ustc.edu.cn/gentoo/releases/amd64/autobuilds/][mirrors.ustc.edu.cn]]
 #+begin_src sh :shebang #!/usr/bin/env bash
 cd /mnt
-cp ~/Downloads/*.xz ./
+cp /home/gentoo/Downloads/*.xz ./
 tar xpvf /mnt/stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 rm *.xz
 exit
