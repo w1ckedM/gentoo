@@ -1,4 +1,4 @@
-#+title: Gentoo Installation Note of Lenovo83AL ( XiaoXin Pro 14 IRH8 ) - chroot
+#+title: Gentoo Installation Note of Lenovo83AL ( XiaoXin Pro 14 IRH8 ) - build
 #+startup: show2levels
 #+properties: header-args :mkdirp yes
 
