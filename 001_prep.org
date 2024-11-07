@@ -66,6 +66,10 @@ export PATH=$PATH:/usr/local/bin:
 #+end_src
 ** auto login for net service
 #+begin_src conf :tangle "/sudo::/mnt/root/.netrc"
+machine gitee.com
+login w1ckedM
+password
+
 machine gitlab.com
 login w1ckedM
 password
