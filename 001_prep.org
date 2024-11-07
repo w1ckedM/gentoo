@@ -86,7 +86,7 @@ mkdir -p /mnt/etc/{bluetooth,keyd,iwd}
 mkdir -p /mnt/etc/systemd/{system/getty@tty1.service.d,network}
 mkdir -p /mnt/etc/kernel/config.d
 mkdir -p /mnt/etc/portage/{package.env,env}
-rm -rf /mnt/etc/portage{package.mask,package.use}
+rm -rf /mnt/etc/portage{package.mask,package.use,package.accepted_keywords}
 cp --dereference /etc/resolv.conf /mnt/etc/
 genfstab -t LABEL /mnt | tee /mnt/etc/fstab
 exit
@@ -327,8 +327,12 @@ sys-devel/clang-common default-compiler-rt default-lld
 sys-libs/libunwind static-libs
 #+end_src
 ** mask - [[file:/mnt/etc/portage/package.mask][package.mask]]
-#+begin_src conf :tangle "/sudo::/mnt/etc/portage/package.mask/default"
+#+begin_src conf :tangle "/sudo::/mnt/etc/portage/package.mask"
 >=dev-lang/python-3.13
+#+end_src
+** accepted - [[file:/mnt/etc/portage/package.accepted_keywords][package.accepted_keywords]]
+#+begin_src conf :tangle "/sudo::/mnt/etc/portage/package.accepted_keywords"
+app-misc/keyd
 #+end_src
 * kernel config
 ** 00-failsafe.config - [[file:/mnt/etc/kernel/config.d/00-failsafe.config][kernel/config.d/00-failsafe.conf]]
