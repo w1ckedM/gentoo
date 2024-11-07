@@ -14,4 +14,4 @@ Lenovo83AL - XiaoXin Pro 14 IRH8
 *** 001-wsl.org: wsl setup
 *** 011-gentoo-wsl.org: wsl as host system
 *** 012-gentoo-linux.org: debian as host system
-*** 021-chroot.org: installation process after arch-chroot
+*** 021-gentoo-chroot.org: install gentoo after chroot
