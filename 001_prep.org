@@ -16,14 +16,18 @@ exit
 mount /dev/nvme0n1p2 /mnt
 btrfs su cr /mnt/@
 btrfs su cr /mnt/@home
+btrfs su cr /mnt/@var
+btrfs su cr /mnt/@nix
 umount /mnt
 exit
 #+end_src
 ** mount partition
 #+begin_src sh :shebang #!/usr/bin/env bash
 mount -o compress=zstd,noatime,ssd,autodefrag,subvol=@ /dev/nvme0n1p2 /mnt/
-mkdir -p /mnt/{boot/efi,home,tmp,var}
+mkdir -p /mnt/{boot/efi,home,tmp,var,nix}
 mount -o compress=zstd,noatime,ssd,autodefrag,subvol=@home /dev/nvme0n1p2 /mnt/home
+mount -o compress=zstd,noatime,ssd,autodefrag,subvol=@var /dev/nvme0n1p2 /mnt/var
+mount -o compress=zstd,noatime,ssd,autodefrag,subvol=@nix /dev/nvme0n1p2 /mnt/nix
 mount /dev/nvme0n1p1 /mnt/boot/efi
 exit
 #+end_src
