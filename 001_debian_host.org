@@ -1,18 +1,11 @@
-#+title: Gentoo Installation Note of Lenovo83AL ( XiaoXin Pro 14 IRH8 ) - Linux host ( Debian )
+#+title: Gentoo Installation Note of Lenovo83AL ( XiaoXin Pro 14 IRH8 ) - prep
 #+startup: show2levels
 #+properties: header-args :mkdirp yes
 
-* prepare the host
-** install packages
-#+begin_src sh :shebang #!/usr/bin/env bash
-apt-get install emacs-gptk fd-find ripgrep \
-    arch-install-scripts dosfstools btrfs-progs
-exit
-#+end_src
-** emacs config
 * prepare the disk
 ** partition the disk
 #+begin_src sh :shebang #!/usr/bin/env bash
+sudo su
 mkfs.vfat -F 32 -n EFI /dev/nvme0n1p1
 mkfs.btrfs -f -L LXS /dev/nvme0n1p2
 exit
@@ -88,9 +81,10 @@ password
 mkdir -p /mnt/etc/{bluetooth,keyd,iwd}
 mkdir -p /mnt/etc/systemd/{system/getty@tty1.service.d,network}
 mkdir -p /mnt/etc/kernel/config.d
-mkdir -p ~/mnt/etc/portage/{package.mask,package.env,env,repos.conf}
+mkdir -p /mnt/etc/portage/{package.env,env}
+rm -rf /mnt/etc/portage{package.mask,package.use}
 cp --dereference /etc/resolv.conf /mnt/etc/
-genfstab -t LABEL /mnt | sudo tee /mnt/etc/fstab
+genfstab -t LABEL /mnt | tee /mnt/etc/fstab
 exit
 #+end_src
 ** bluetooth - [[file:/mnt/etc/bluetooth/main.conf][bluetooth/main.conf]]
@@ -218,7 +212,7 @@ KEYMAP=us
 ** make.conf - [[file:/mnt/etc/portage/make.conf][make.conf]]
 #+begin_src conf :tangle "/sudo::/mnt/etc/portage/make.conf"
 ACCEPT_LICENSE="*"
-ACCEPT_KEYWORDS="~amd64"
+ACCEPT_KEYWORDS="amd64"
 
 COMMON_FLAGS="-march=native -O3 -flto -pipe -fomit-frame-pointer -falign-functions=32"
 CFLAGS="${COMMON_FLAGS} -fdata-sections -ffunction-sections"
@@ -267,14 +261,17 @@ LDFLAGS="${COMMON_FLAGS}"
 #+begin_src conf :tangle "/sudo::/mnt/etc/portage/gentoo.repo"
 [DEFAULT]
 main-repo = gentoo
+
 [gentoo]
 location = /var/db/repos/gentoo
 sync-type = git
 sync-uri = https://mirrors.ustc.edu.cn/gentoo.git
+
 [guru]
 location = /var/db/repos/guru
 sync-type = git
 sync-uri = https://github.com/gentoo-mirror/guru.git
+
 [gentoo-zh]
 location = /var/db/repos/gentoo-zh
 sync-type = git
@@ -299,8 +296,8 @@ sys-devel/clang-runtime failsafe.conf
 sys-devel/clang-toolchain-symlinks failsafe.conf
 sys-devel/gcc failsafe.conf
 #+end_src
-** use - [[file:/mnt/etc/portage/package.use/default][package.use/default]]
-#+begin_src conf :tangle "/sudo::/mnt/etc/portage/package.use/default"
+** use - [[file:/mnt/etc/portage/package.use][package.use]]
+#+begin_src conf :tangle "/sudo::/mnt/etc/portage/package.use"
 media-libs/freetype -harfbuzz
 
 app-arch/xz-utils static-libs
@@ -325,7 +322,7 @@ app-text/poppler -jpeg2k
 sys-devel/clang-common default-compiler-rt default-lld
 sys-libs/libunwind static-libs
 #+end_src
-** mask - [[file:/mnt/etc/portage/package.mask/default][package.mask/default]]
+** mask - [[file:/mnt/etc/portage/package.mask][package.mask]]
 #+begin_src conf :tangle "/sudo::/mnt/etc/portage/package.mask/default"
 >=dev-lang/python-3.13
 #+end_src
