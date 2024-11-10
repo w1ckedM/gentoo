@@ -126,8 +126,6 @@ LABEL=LXS   /home   btrfs   rw,noatime,compress=zstd:3,ssd,space_cache=v2,autode
 # /dev/nvme0n1p1
 LABEL=EFI   /boot/efi   vfat    defaults 0 2
 
-# /var/tmp/portage
-#tmpfs  /var/tmp/portage    tmpfs   size=8G
 #+end_src
 ** hostname - [[file:/mnt/etc/hostname][hostname]]
 #+begin_src conf :tangle "/sudo::/mnt/etc/hostname"
