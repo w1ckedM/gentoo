@@ -90,7 +90,7 @@ mkdir -p /mnt/etc/{bluetooth,keyd,iwd}
 mkdir -p /mnt/etc/systemd/{system/getty@tty1.service.d,network}
 mkdir -p /mnt/etc/kernel/config.d
 mkdir -p /mnt/etc/portage/{package.env,env}
-rm -rf /mnt/etc/portage{package.mask,package.use,package.accepted_keywords}
+rm -rf /mnt/etc/portage{package.mask,package.use,binrepos.conf}
 cp --dereference /etc/resolv.conf /mnt/etc/
 genfstab -t LABEL /mnt | tee /mnt/etc/fstab
 exit
@@ -220,7 +220,7 @@ KEYMAP=us
 ACCEPT_LICENSE="*"
 ACCEPT_KEYWORDS="amd64"
 
-COMMON_FLAGS="-march=native -O3 -flto -pipe -fomit-frame-pointer -falign-functions=32"
+COMMON_FLAGS="-march=native -O2 -flto -pipe -fomit-frame-pointer -falign-functions=32"
 CFLAGS="${COMMON_FLAGS} -fdata-sections -ffunction-sections"
 CXXFLAGS="${COMMON_FLAGS}"
 FCFLAGS="${COMMON_FLAGS}"
@@ -230,6 +230,7 @@ RUSTFLAGS="-C debuginfo=0 -C codegen-units=1 -C target-cpu=native -C opt-level=3
 
 MAKEOPTS="-j8 -l9"
 EMERGE_DEFAULT_OPTS="--autounmask-write=y --complete-graph=y --quiet-build=y --with-bdeps=y --verbose --ask --deep --keep-going"
+EMERGE_DEFAULT_OPTS="{EMERGE_DEFAULT_OPTS} --getbinpkg --binpkg-respect-use=y"
 FEATURES="candy fixlafiles unmerge-orphans noman nodoc noinfo notitles parallel-install parallel-fetch"
 #PORTAGE_SCHEDULING_POLICY="idle"
 
@@ -263,8 +264,8 @@ FCFLAGS="${COMMON_FLAGS}"
 FFLAGS="${COMMON_FLAGS}"
 LDFLAGS="${COMMON_FLAGS}"
 #+end_src
-** gentoo.repo - [[file:/mnt/etc/portage/gentoo.repo][gentoo.repo]]
-#+begin_src conf :tangle "/sudo::/mnt/etc/portage/gentoo.repo"
+** repos - [[file:/mnt/etc/portage/repos][repos]]
+#+begin_src conf :tangle "/sudo::/mnt/etc/portage/repos"
 [DEFAULT]
 main-repo = gentoo
 
@@ -283,11 +284,11 @@ location = /var/db/repos/gentoo-zh
 sync-type = git
 sync-uri = https://github.com/gentoo-mirror/gentoo-zh.git
 #+end_src
-** gentoo.conf - [[file:/mnt/etc/portage/binrepos.conf/gentoobinhost.conf][binrepos.conf/gentoobinhost.conf]]
-#+begin_src conf :tangle "/sudo::/mnt/etc/portage/binrepos.conf/gentoobinhost.conf"
+** gentoo.conf - [[file:/mnt/etc/portage/binrepos.conf][binrepos.conf]]
+#+begin_src conf :tangle "/sudo::/mnt/etc/portage/binrepos.conf"
 [binhost]
 priority = 1
-sync-uri = https://distfiles.gentoo.org/releases/amd64/binpackages/23.0/x86-64-v3/
+sync-uri = https://mirrors.ustc.edu/gentoo/releases/amd64/binpackages/23.0/x86-64-v3/
 #+end_src
 ** packages - [[file:/mnt/etc/portage/profile/packages][profile/packages]]
 #+begin_src conf :tangle "/sudo::/mnt/etc/portage/profile/packages"
