@@ -20,6 +20,7 @@ emerge-webrsync
 emerge --oneshot sys-apps/portage dev-vcs/git
 rm -rf /var/db/repos/gentoo
 mv /etc/portage/gentoo.repo /etc/portage/repos.conf/gentoo
+getuto
 emaint sync
 exit
 #+end_src
