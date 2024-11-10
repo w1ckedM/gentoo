@@ -220,7 +220,7 @@ KEYMAP=us
 ACCEPT_LICENSE="*"
 ACCEPT_KEYWORDS="amd64"
 
-COMMON_FLAGS="-march=native -O2 -flto -pipe -fomit-frame-pointer -falign-functions=32"
+COMMON_FLAGS="-march=alderlake -O2 -flto -pipe -fomit-frame-pointer -falign-functions=32"
 CFLAGS="${COMMON_FLAGS} -fdata-sections -ffunction-sections"
 CXXFLAGS="${COMMON_FLAGS}"
 FCFLAGS="${COMMON_FLAGS}"
